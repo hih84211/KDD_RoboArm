@@ -1,0 +1,25 @@
+<launch>
+  <arg
+    name="model" />
+  <param
+    name="robot_description"
+    textfile="$(find cnc_test17)/robots/cnc_test17.urdf" />
+    
+  <node
+    name="joint_state_publisher_gui"
+    pkg="joint_state_publisher_gui"
+    type="joint_state_publisher_gui" />
+  <node
+    name="robot_state_publisher"
+    pkg="robot_state_publisher"
+    type="robot_state_publisher" >
+    <!--remap from="/joint_states" to="/cnc_test17/joint_states" /-->
+  </node>
+  
+  <node
+    name="rviz"
+    pkg="rviz"
+    type="rviz"
+    args="-d $(find cnc_test17)/urdf.rviz" />
+    
+</launch>
