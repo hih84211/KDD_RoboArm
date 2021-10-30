@@ -1,0 +1,11 @@
+<launch>
+	<arg
+		name="model" />
+	<param
+		name="robot_description"
+		textfile="$(find KDD_RoboArm)/robots/KDD_RoboArm.urdf"/>
+	<node
+		name="gazebo_command_gui"
+		pkg="KDD_RoboArm/gazebo_command_gui"
+		type="gazebo_command_gui"/>
+</launch>

@@ -1,0 +1,29 @@
+KDD_RoboArm: 
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 100  
+    
+  x_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: bx_joint
+    pid: {p: 15000, i: 5, d: 400, i_clamp: 1000.0}
+    
+  y_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: xy_joint
+    pid: {p: 15000, i: 5, d: 400, i_clamp: 1000.0}
+    
+  z_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: yz_joint
+    pid: {p: 15000, i: 5, d: 400, i_clamp: 1000.0}
+    
+  nozzlebase_controller:
+    type: effort_controllers/JointPositionController
+    joint: nozzlebase_joint
+    pid: {p: 70, i: 2, d: 0, i_clamp: 1000.0}
+  
+  nozzle_controller:
+    type: effort_controllers/JointPositionController
+    joint: nozzle_joint
+    pid: {p: 3500, i: 150, d: 0, i_clamp: 1000.0}
