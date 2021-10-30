@@ -1,0 +1,542 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-1-g15f4949  Build Version: 1.6.7594.29634
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="cnc_test17">
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/cnc_test17</robotNamespace>
+    </plugin>
+  </gazebo>
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="-0.025112 -0.00018578 0.019008"
+        rpy="0 0 0" />
+      <mass
+        value="1729.3927673525" />
+      <inertia
+        ixx="475.397369733653"
+        ixy="34.5663756406899"
+        ixz="-1.79934549289071"
+        iyy="1072.78236249213"
+        iyz="-1.69210564621586"
+        izz="1103.62478080047" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cnc_test17/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.52941 0.6 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cnc_test17/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="x_link">
+    <inertial>
+      <origin
+        xyz="0.0079741 -0.00011913 0.078495"
+        rpy="0 0 0" />
+      <mass
+        value="1.5957" />
+      <inertia
+        ixx="0.0042058"
+        ixy="-8.1189E-13"
+        ixz="1.3549E-07"
+        iyy="0.0076559"
+        iyz="-2.5549E-05"
+        izz="0.0044974" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cnc_test17/meshes/front_end_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.52941 0.6 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cnc_test17/meshes/front_end_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="bx_joint"
+    type="prismatic">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="x_link" />
+    <axis
+      xyz="1 0 0" />
+    <!-- New -->
+    <dynamics
+      damping="0.8"
+      friction="0.5"/>
+    <!-- New -->
+    <limit
+      lower="-0.15"
+      upper="0.15"
+      effort="240"
+      velocity="0.3" />
+    <!--safety_controller
+      soft_upper="0.15"
+      soft_lower="-0.15"
+      k_velocity="0" /-->
+  </joint>
+  <link
+    name="y_link">
+    <inertial>
+      <origin
+        xyz="0.002362 0.023475 0.17083"
+        rpy="0 0 0" />
+      <mass
+        value="5.272" />
+      <inertia
+        ixx="0.021924"
+        ixy="-4.5762E-06"
+        ixz="0.0018667"
+        iyy="0.032682"
+        iyz="-7.7909E-07"
+        izz="0.030507" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cnc_test17/meshes/left_right_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 0 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cnc_test17/meshes/left_right_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="xy_joint"
+    type="prismatic">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="x_link" />
+    <child
+      link="y_link" />
+    <axis
+      xyz="0 1 0" />
+    <dynamics
+      damping="0.8"
+      friction="0.5"/>
+    <limit
+      lower="-0.1"
+      upper="0.1"
+      effort="70"
+      velocity="0.2" />
+    <!--safety_controller
+      soft_upper="0.1"
+      soft_lower="-0.1"
+      k_velocity="0" /-->
+  </joint>
+  <link
+    name="z_link">
+    <inertial>
+      <origin
+        xyz="-0.0343 0.025001 0.14574"
+        rpy="0 0 0" />
+      <mass
+        value="2.2792" />
+      <inertia
+        ixx="0.0091615"
+        ixy="1.5787E-08"
+        ixz="0.00018817"
+        iyy="0.0096145"
+        iyz="6.3703E-09"
+        izz="0.0051301" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cnc_test17/meshes/up_down_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="1 0 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <!--origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://cnc_test17/meshes/up_down_link.STL" />
+      </geometry-->
+      <origin
+        xyz="-0.004 0.004 0.1754"
+        rpy="0 0 0" />
+      <geometry>
+        <box
+          size="0.024 0.09 0.06" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="yz_joint"
+    type="prismatic">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="y_link" />
+    <child
+      link="z_link" />
+    <axis
+      xyz="0 0 1" />
+    <dynamics
+      damping="0.8"
+      friction="0.5"/>
+    <limit
+      lower="-0.02"
+      upper="0.02"
+      effort="90"
+      velocity="0.2" />
+    <!--safety_controller
+      soft_upper="0.03"
+      soft_lower="-0.03"
+      k_velocity="0" /-->
+  </joint>
+<link
+  name="nozzlebase_Link">
+  <inertial>
+    <!--origin
+      xyz="0 0 0.022"
+      rpy="0 0 0" />
+    <origin
+      xyz="-0.020442 0.025103 0.098498"
+      rpy="0 0 0" /-->
+   <!-- with chip1 -->
+    <origin
+      xyz="1.6339E-06 -1.2846E-05 -0.016502"
+      rpy="0 0 0" />
+    <mass
+      value="0.0023793" />
+    <inertia
+      ixx="2.0288E-07"
+      ixy="2.6567E-10"
+      ixz="1.0226E-10"
+      iyy="2.0095E-07"
+      iyz="-7.5613E-10"
+      izz="6.5556E-08" />
+   <!---->
+    <!--mass
+      value="0.08925139" />
+    <inertia
+      ixx="0.00000536"
+      ixy="0"
+      ixz="0"
+      iyy="0.00000536"
+      iyz="0"
+      izz="0.00000286" /-->
+  </inertial>
+  <visual>
+   <!-- with chip1 -->
+    <origin
+      xyz="0.020443 -0.025116 -0.115"
+      rpy="0 0 0" />
+   <!---->
+    <!--origin
+      xyz="0 0 -0.0125"
+      rpy="0 0 0" /-->
+    <geometry>
+      <!--cylinder
+        radius="0.008"
+        length="0.023" /-->
+      <mesh
+        filename="package://cnc_test17/meshes/nozzlebase_Link.STL" />
+    </geometry>
+    <material
+      name="">
+      <color
+        rgba="0.79216 0.81961 0.93333 1" />
+    </material>
+  </visual>
+  <collision>
+   <!-- with chip1 -->
+    <origin
+      xyz="0.020443 -0.025116 -0.115"
+      rpy="0 0 0" />
+    <geometry>
+      <mesh
+        filename="package://cnc_test17/meshes/nozzlebase_Link.STL" />
+    </geometry>
+   <!---->
+    <!--origin
+      xyz="0 0 -0.0125"
+      rpy="0 0 0" />
+    <geometry>
+      <cylinder
+        radius="0.008"
+        length="0.023" />
+    </geometry-->
+  </collision>
+</link>
+<joint
+  name="nozzlebase_joint"
+  type="revolute">
+  <!--origin
+    xyz="0 0 0"
+    rpy="0 0 0" /-->
+  <origin
+    xyz="0 0 0.143"
+    rpy="0 0 0" />
+  <parent
+    link="z_link" />
+  <child
+    link="nozzlebase_Link" />
+  <axis
+    xyz="0 0 1" />
+  <dynamics
+    friction="0.09" />
+  <limit
+    lower="-1.57"
+    upper="1.57"
+    effort="1"
+    velocity="1" />
+</joint>
+<link
+  name="nozzle_Link">
+  <inertial>
+   <!--with chip1-->
+    <origin
+      xyz="-4.2857E-07 -2.3467E-06 -0.0079793"
+      rpy="0 0 0" />
+    <mass
+      value="0.0016233" />
+    <inertia
+      ixx="3.9985E-08"
+      ixy="-1.1612E-09"
+      ixz="-4.6636E-12"
+      iyy="4.8413E-08"
+      iyz="-2.5537E-11"
+      izz="2.9368E-08" />
+   <!---->
+    <!--origin
+      xyz="0 0 -0.022"
+      rpy="0 0 0" />
+    <mass
+      value="0.00504768" />
+    <inertia
+      ixx="0.00000058"
+      ixy="0"
+      ixz="0"
+      iyy="0.00000058"
+      iyz="0"
+      izz="0.00000001" /-->
+  </inertial>
+  <visual>
+   <!-- with chip1-->
+    <origin
+      xyz="0.020365 -0.025099 -0.081278"
+      rpy="0 0 0" />
+    <geometry>
+      <mesh
+        filename="package://cnc_test17/meshes/nozzle_Link.STL" />
+    </geometry>
+   <!---->
+    <!--origin
+      xyz="0 0 -0.022"
+      rpy="0 0 0" />
+    <geometry>
+      <cylinder
+        radius="0.0015"
+        length="0.037" />
+    </geometry-->
+    <material
+      name="">
+      <color
+        rgba="0.79216 0.81961 0.93333 1" />
+    </material>
+  </visual>
+  <collision>
+   <!-- with chip1-->
+    <origin
+      xyz="0.020365 -0.025099 -0.081278"
+      rpy="0 0 0" />
+    <geometry>
+      <mesh
+        filename="package://cnc_test17/meshes/nozzle_Link.STL" />
+    </geometry>
+   <!---->
+    <!--origin
+      xyz="0 0 -0.022"
+      rpy="0 0 0" />
+    <geometry>
+      <cylinder
+        radius="0.0015"
+        length="0.037" />
+    </geometry-->
+  </collision>
+</link>
+<joint
+  name="nozzle_joint"
+  type="revolute">
+  <origin
+    xyz="0 0 -0.038"
+    rpy="0 0 0" />
+  <parent
+    link="nozzlebase_Link" />
+  <child
+    link="nozzle_Link" />
+  <axis
+    xyz="0 1 0" />
+  <dynamics
+    friction="0.09" />
+  <limit
+    lower="-0.7"
+    upper="0.7"
+    effort="1"
+    velocity="1" />
+  <!--safety_controller
+    soft_upper="0.7"
+    soft_lower="-0.7"
+    k_velocity="0" /-->
+</joint>
+  <!-- New -->
+  <transmission name="bx">
+      <type>transmission_interface/SimpleTransmission</type>
+    <actuator name="bx_motor">
+    </actuator>
+    <joint name="bx_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <mechanicalReduction>50.0</mechanicalReduction>
+      <motorTorqueConstant>1.0</motorTorqueConstant>
+  </transmission>
+  <!-- New -->
+  <transmission name="xy">
+      <type>transmission_interface/SimpleTransmission</type>
+    <actuator name="xy_motor">
+    </actuator>
+    <joint name="xy_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <mechanicalReduction>50.0</mechanicalReduction>
+      <motorTorqueConstant>1.0</motorTorqueConstant>
+  </transmission>
+  <transmission name="yz">
+      <type>transmission_interface/SimpleTransmission</type>
+    <actuator name="yz_motor">
+    </actuator>
+    <joint name="yz_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <mechanicalReduction>50.0</mechanicalReduction>
+      <motorTorqueConstant>1.0</motorTorqueConstant>
+  </transmission>
+  <transmission name="nozzlebase">
+    <type>transmission_interface/SimpleTransmission</type>
+    <actuator name="nozzlebase_motor">
+    </actuator>
+    <joint name="nozzlebase_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <mechanicalReduction>10.0</mechanicalReduction>
+    <motorTorqueConstant>1.0</motorTorqueConstant>
+  </transmission>
+  <transmission name="nozzle">
+    <type>transmission_interface/SimpleTransmission</type>
+    <actuator name="nozzle_motor">
+    </actuator>
+    <joint name="nozzle_joint">
+      <hardwareInterface>EffortJointInterface</hardwareInterface>
+    </joint>
+    <mechanicalReduction>10.0</mechanicalReduction>
+    <motorTorqueConstant>1.0</motorTorqueConstant>
+  </transmission>
+<!-- New -->
+  <gazebo reference="bx_joint">
+    <erp>0.1</erp>
+    <stopKd value="100000000.0" />
+    <stopKp value="100000000.0" />
+    <fudgeFactor value="0.1" />
+  </gazebo>
+ <!-- New -->
+  <gazebo reference="xy_joint">
+    <erp>0.1</erp>
+    <stopKd value="100000000.0" />
+    <stopKp value="100000000.0" />
+    <fudgeFactor value="0.1" />
+  </gazebo>
+  <gazebo reference="yz_joint">
+    <erp>0.1</erp>
+    <stopKd value="100000000.0" />
+    <stopKp value="100000000.0" />
+    <fudgeFactor value="0.1" />
+  </gazebo>
+  <gazebo reference="base_link">
+    <mu1>1</mu1>
+    <mu2>1</mu2>
+    <fdir1>1 0 0</fdir1>
+    <minDepth>0.001</minDepth>
+  </gazebo>
+  <gazebo reference="nozzlebase_joint">
+    <erp>0.1</erp>
+    <stopKd value="100000000.0" />
+    <stopKp value="100000000.0" />
+    <fudgeFactor value="0.1" />
+  </gazebo>
+  <gazebo reference="nozzle_joint">
+    <erp>0.1</erp>
+    <stopKd value="100000000.0" />
+    <stopKp value="100000000.0" />
+    <fudgeFactor value="0.1" />
+  </gazebo>
+</robot>
