@@ -97,7 +97,6 @@ def pose_listener():
     
     rospy.Subscriber('/KDD_RoboArm/joint_states', JointState, pose_cb)
     rate=rospy.Rate(10)
-
     # spin() simply keeps python from exiting until this node is stopped
     
     
