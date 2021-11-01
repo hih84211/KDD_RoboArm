@@ -3,37 +3,37 @@
 import cv2
 import numpy as np
 import math
+import listofpathpoint
 import rospy
 from std_msgs.msg import Float64
 from sensor_msgs.msg import JointState
 import threading
 import time
 
-img = cv2.imread('/home/peter/mother_board.png')
+img = cv2.imread('path to photo')
 current_pose = [.0, .0, .0]
 # rospy.Publisher('/KDD_RoboArm/nozzlebase_controller/command', Float64, queue_size = 1),
 # rospy.Publisher('/KDD_RoboArm/nozzle_controller/command', Float64, queue_size = 1)]))
 
-def on_EVENT_LBUTTONDOWN(event, x, y, flags, param):
-    if event == cv2.EVENT_LBUTTONDOWN:
-        xy = (x, img.shape[:2][0]-y)
-        print('index: ', xy)
-        val = img[y][x][0]
-        print('val: ', val)
-        coord = pixel2coordinate(xy, val)
-        print('3D coordinate: ', coord)
-        goto(coord, param)
-        '''val = img[y][x][0]
-        print('val: ', val)
-        coord = pixel2coordinate(xy, val)
-        print('3D coordinate: ', coord)
-        param[0].publish(coord[0])
-        param[1].publish(coord[1])
-        param[2].publish(coord[2] - 0.03)
-        cv2.circle(img, (x, y), 1, (255, 0, 0), thickness=-1)
-        cv2.putText(img, xy, (x, y), cv2.FONT_HERSHEY_PLAIN,
-                    1.0, (0, 0, 0), thickness=1)
-        img.imshow('image', img)'''
+def on_EVENT_LBUTTONDOWN( x, y, param):
+    xy = (x, img.shape[:2][0]-y)
+    print('index: ', xy)
+    val = img[y][x][0]
+    print('val: ', val)
+    coord = pixel2coordinate(xy, val)
+    print('3D coordinate: ', coord)
+    goto(coord, param)
+    '''val = img[y][x][0]
+    print('val: ', val)
+    coord = pixel2coordinate(xy, val)
+    print('3D coordinate: ', coord)
+    param[0].publish(coord[0])
+    param[1].publish(coord[1])
+    param[2].publish(coord[2] - 0.03)
+    cv2.circle(img, (x, y), 1, (255, 0, 0), thickness=-1)
+    cv2.putText(img, xy, (x, y), cv2.FONT_HERSHEY_PLAIN,
+                1.0, (0, 0, 0), thickness=1)
+    img.imshow('image', img)'''
 
 def pixel2coordinate(p_index, val):
     # Gazebo中原點座標與height_map原點間的偏量
@@ -112,10 +112,9 @@ if __name__=='__main__':
     y_publisher = rospy.Publisher('/KDD_RoboArm/y_position_controller/command', Float64, queue_size = 1) 
     z_publisher = rospy.Publisher('/KDD_RoboArm/z_position_controller/command', Float64, queue_size = 1)
     
-    
-    cv2.namedWindow('image')
-    cv2.setMouseCallback('image', on_EVENT_LBUTTONDOWN, (x_publisher, y_publisher, z_publisher))
-    cv2.imshow('image', img)
+    path = listofpathpoint.main() # get a list of x y tuples
+    for point in path:
+        on_EVENT_LBUTTONDOWN(point[0],point[1],(x_publisher, y_publisher, z_publisher))
     t = threading.Thread(target = pose_listener)
     t.start()
     while(True):
@@ -125,10 +124,6 @@ if __name__=='__main__':
         except Exception:
             # 等待 t 這個子執行緒結束
             t.join()
-            cv2.destroyWindow('image')
             break
     # 等待 t 這個子執行緒結束
     t.join()
-    
-    cv2.waitKey(0)
-    cv2.destroyAllWindow()

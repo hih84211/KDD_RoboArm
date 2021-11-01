@@ -16,7 +16,16 @@ def A_walkinmatrix(matrix,startpoint_x, startpoint_y ):
             walkpoints.append((startpoint_x + i, startpoint_y + j))
     return walkpoints
 
-test = cnc_input.main(['-i','right_chip.json'])
-print(test[6][0])
-plt.imshow(test[6][0], cmap = plt.get_cmap('gray'))
-A_walkonchip(test)
+
+def main():
+    test = cnc_input.main(['-i','right_chip.json'])
+    walkpoints = A_walkonchip(test)
+    return walkpoints
+
+
+
+
+
+
+if __name__ == '__main__':
+    main()
