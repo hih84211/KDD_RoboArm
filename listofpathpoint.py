@@ -1,6 +1,4 @@
 import cnc_input
-import json
-import matplotlib.pyplot as plt
 
 
 def A_walkonchip(matrices):
