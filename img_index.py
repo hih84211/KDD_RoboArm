@@ -9,6 +9,7 @@ from sensor_msgs.msg import JointState
 import threading
 import time
 import random
+import listofpathpoint
 
 img = cv2.imread('/home/peter/mother_board.png')
 current_pose = [.0, .0, .0]
@@ -105,7 +106,8 @@ if __name__=='__main__':
     
     t = threading.Thread(target = pose_listener)
     t.start()
-    path = [ (random.randint(0, 1023), random.randint(0, 553)) for i in range(30)]
+    # path = [ (random.randint(0, 1023), random.randint(0, 553)) for i in range(30)]
+    path = listofpathpoint.main() # get a list of x y tuples
     print(path)
     
     
