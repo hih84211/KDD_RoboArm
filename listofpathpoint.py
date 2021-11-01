@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 def A_walkonchip(matrices):
     allsteps = []
     for matrix in matrices:
-       allsteps.append((A_walkinmatrix(matrix[0],matrix[1],matrix[2]))
+       allsteps.d(A_walkinmatrix(matrix[0],matrix[1],matrix[2]))
     return allsteps
 
 def A_walkinmatrix(matrix,startpoint_x, startpoint_y ):
