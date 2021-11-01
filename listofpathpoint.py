@@ -1,23 +1,23 @@
 import cnc_input
 
 
-def A_walkonchip(matrices):
+def A_walkonchip(matrices,gluewidth):
     allsteps = []
     for matrix in matrices:
-       allsteps.extend(A_walkinmatrix(matrix[0],matrix[1],matrix[2]))                 
+       allsteps.extend(A_walkinmatrix(matrix[0],matrix[1],matrix[2],int(gluewidth)))                 
     return allsteps
 
-def A_walkinmatrix(matrix,startpoint_x, startpoint_y ):
+def A_walkinmatrix(matrix,startpoint_x, startpoint_y,gluewidth ):
     walkpoints = []
-    for i in range(1, len(matrix),6):
-        for j in range(1,len(matrix[0]),6):
+    for i in range(1, len(matrix),gluewidth):
+        for j in range(1,len(matrix[0]),gluewidth):
             walkpoints.append((startpoint_x + i, startpoint_y + j))
     return walkpoints
 
 
 def main():
-    test = cnc_input.main(['-i','right_chip.json'])
-    walkpoints = A_walkonchip(test)
+    test,gluewidth = cnc_input.main(['-i','right_chip.json'])
+    walkpoints = A_walkonchip(test,gluewidth)
     return walkpoints
 
 
