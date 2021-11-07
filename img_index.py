@@ -48,14 +48,17 @@ def goto(xyz, publishers):
     global current_pose
     publishers[0].publish(xyz[0])
     publishers[1].publish(xyz[1])
-    publishers[2].publish(xyz[2] - 0.03)
+    publishers[2].publish(xyz[2] - 0.05)
     print('Go to: ', xyz)
-    time.sleep(0.1)
+    #time.sleep(0.2)
     
 
 def go_for_a_walk(seq, publishers):
     for i in seq:
-        val = img[i[1]][img.shape[:2][0]-i[0]][0]
+        # val = img[i[1]][img.shape[:2][0]-i[0]][0]
+        print('i[1]: ',i[1])
+        print('i[0]: ',i[0])
+        val = img[int(i[1])][img.shape[:2][0]-int(i[0])][0]
         coord = pixel2coordinate(i, val)
         goto(coord, publishers)
         while True:
@@ -107,9 +110,8 @@ if __name__=='__main__':
     t = threading.Thread(target = pose_listener)
     t.start()
     # path = [ (random.randint(0, 1023), random.randint(0, 553)) for i in range(30)]
-    path = listofpathpoint.main() # get a list of x y tuples
+    path = listofpathpoint.run() # get a list of x y tuples
     print(path)
-    
     
     go_for_a_walk(path, (x_publisher, y_publisher, z_publisher))
     '''
