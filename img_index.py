@@ -29,8 +29,8 @@ def on_EVENT_LBUTTONDOWN(event, x, y, flags, param):
 
 def pixel2coordinate(p_index, val):
     # Gazebo中原點座標與height_map原點間的偏量
-    x_offset = -460
-    y_offset = -120
+    x_offset = -485
+    y_offset = -123
     # height_map 中的 0 與真實值之間的偏量
     z_bias = -9.7    
     tf_x = 0.239144/1024
@@ -48,7 +48,7 @@ def goto(xyz, publishers):
     global current_pose
     publishers[0].publish(xyz[0])
     publishers[1].publish(xyz[1])
-    publishers[2].publish(xyz[2] - 0.05)
+    publishers[2].publish(xyz[2] - 0.045)
     print('Go to: ', xyz)
     #time.sleep(0.2)
     
@@ -107,7 +107,7 @@ if __name__=='__main__':
     y_publisher = rospy.Publisher('/KDD_RoboArm/y_position_controller/command', Float64, queue_size = 1) 
     z_publisher = rospy.Publisher('/KDD_RoboArm/z_position_controller/command', Float64, queue_size = 1)
     
-    t = threading.Thread(target = pose_listener)
+    '''t = threading.Thread(target = pose_listener)
     t.start()
     # path = [ (random.randint(0, 1023), random.randint(0, 553)) for i in range(30)]
     path = listofpathpoint.run() # get a list of x y tuples
@@ -129,4 +129,4 @@ if __name__=='__main__':
             break
     
     cv2.waitKey(0)
-    cv2.destroyAllWindow()'''
+    cv2.destroyAllWindow()
